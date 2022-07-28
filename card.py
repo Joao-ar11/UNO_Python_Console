@@ -56,6 +56,3 @@ class Card:
     
     def get_color(self):
         return self.color
-
-
-help(Card)
