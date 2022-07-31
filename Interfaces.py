@@ -2,10 +2,15 @@ from os import system, name
 
 
 def clear():
+    """Clears the the prompt.
+    """
     system('cls' if name == 'nt' else 'clear')
 
 
 def menu():
+    """The UNO game menu and its options.
+    Returns the exit value(101) or the int of the number of players(plus the user).
+    """
     def title():
         clear()
         print('¨' * 64)
@@ -17,7 +22,7 @@ def menu():
         while True:
             choice = input('1 - Play\n2 - Tutorial\n3 - Exit\nYour choice: ')
             if not choice.isnumeric() or int(choice) > 3 or int(choice) < 1:
-                print('Please, enter a valid option')
+                print('\nPlease, enter a valid option')
                 continue
             break
         if int(choice) == 1:
@@ -25,7 +30,7 @@ def menu():
             while True:
                 playernum = input('How many players do you wish to play against? (min:1/max:3) ')
                 if not playernum.isnumeric() or int(playernum) > 3 or int(playernum) < 1:
-                    print('Please, enter a valid number')
+                    print('\nPlease, enter a valid number')
                     continue
                 break
             return int(playernum) + 1
@@ -42,7 +47,16 @@ def menu():
 
 
 def interface(qnt_of_players, hand, last_played, turn, qnt_of_cards):
-    clear()
+    """Shows the Game interface.
+
+    Args:
+        qnt_of_players (int): the number of players in the game (min:2, max:4). 
+        hand (list of Card()): the list of cards the player has in hand.
+        last_played (Card()): the last played card.
+        turn (int): the turn (min:1, max:qnt_of_players).
+        qnt_of_cards (dict): dictionary containing each player's card quantity.
+    """
+    # clear()
     if qnt_of_players == 2:
         if turn == 1:
             arrow = "v"
