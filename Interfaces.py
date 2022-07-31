@@ -8,9 +8,9 @@ def clear():
 def menu():
     def title():
         clear()
-        print('¨' * 61)
-        print(f'{"UNO":^61}')
-        print('_' * 61 + '\n')
+        print('¨' * 64)
+        print(f'{"UNO":^64}')
+        print('_' * 64 + '\n')
 
     while True:
         title()
@@ -42,12 +42,13 @@ def menu():
 
 
 def interface(qnt_of_players, hand, last_played, turn, qnt_of_cards):
+    clear()
     if qnt_of_players == 2:
         if turn == 1:
             arrow = "v"
         elif turn == 2:
             arrow = "^"
-        print(f'{qnt_of_cards["Player 2"]:^61}\n\n{arrow:^61}\n')
+        print(f'{qnt_of_cards["Player 2"]:^64}\n\n{arrow:^64}\n')
     elif qnt_of_players == 3:        
         if turn == 1:
             arrow = 'v'
@@ -55,7 +56,7 @@ def interface(qnt_of_players, hand, last_played, turn, qnt_of_cards):
             arrow = '<'
         elif turn == 3:
             arrow = '>'
-        print(f'\n\n{qnt_of_cards["Player 2"]:<2}{arrow:^57}{qnt_of_cards["Player 3"]:>2}\n')
+        print(f'\n\n{qnt_of_cards["Player 2"]:<2}{arrow:^60}{qnt_of_cards["Player 3"]:>2}\n')
     elif qnt_of_players == 4:
         if turn == 1:
             arrow = "v"
@@ -65,7 +66,22 @@ def interface(qnt_of_players, hand, last_played, turn, qnt_of_cards):
             arrow = "^"
         elif turn == 4:
             arrow = ">"
-        print(f'{qnt_of_cards["Player 3"]:^61}\n\n')
-        print(f'{qnt_of_cards["Player 2"]:<2}{arrow:^57}{qnt_of_cards["Player 4"]:>2}\n')
-
-interface(4, [1, 2, 3], 4, 4, {'Player 1': 5, 'Player 2': 2, 'Player 3': 3, 'Player 4': 4})
+        print(f'{qnt_of_cards["Player 3"]:^64}\n\n')
+        print(f'{qnt_of_cards["Player 2"]:<2}{arrow:^60}{qnt_of_cards["Player 4"]:>2}\n')
+    print(f'{"_________":^64}\n{"|       |":^64}\n{f"|{last_played.effect():^7}|":^64}'
+          f'\n{f"|{last_played.get_color():^7}|":^64}\n{"|       |":^64}\n{"¨¨¨¨¨¨¨¨¨":^64}\n\n')
+    for position in range(0, len(hand), 6):
+        if len(hand) - position >= 6:
+            qnt = 6
+        else:
+            qnt = len(hand) - position
+        print('_________  ' * qnt)
+        for number in range(position, position + qnt):
+            print(f'|{number + 1:<7}|', end='  ')
+        print()
+        for card in range(position, position + qnt):
+            print(f'|{hand[card].effect():^7}|', end='  ')
+        print()
+        for card in range(position, position + qnt):
+            print(f'|{hand[card].get_color():^7}|', end='  ')
+        print('\n' + '|       |  ' * qnt + '\n' + '¨¨¨¨¨¨¨¨¨  ' * qnt)
