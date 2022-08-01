@@ -56,7 +56,7 @@ def interface(qnt_of_players, hand, last_played, turn, qnt_of_cards):
         turn (int): the turn (min:1, max:qnt_of_players).
         qnt_of_cards (dict): dictionary containing each player's card quantity.
     """
-    # clear()
+    clear()
     if qnt_of_players == 2:
         if turn == 1:
             arrow = "v"
@@ -84,18 +84,21 @@ def interface(qnt_of_players, hand, last_played, turn, qnt_of_cards):
         print(f'{qnt_of_cards["Player 2"]:<2}{arrow:^60}{qnt_of_cards["Player 4"]:>2}\n')
     print(f'{"_________":^64}\n{"|       |":^64}\n{f"|{last_played.effect():^7}|":^64}'
           f'\n{f"|{last_played.get_color():^7}|":^64}\n{"|       |":^64}\n{"¨¨¨¨¨¨¨¨¨":^64}\n\n')
-    for position in range(0, len(hand), 6):
-        if len(hand) - position >= 6:
-            qnt = 6
-        else:
-            qnt = len(hand) - position
-        print('_________  ' * qnt)
-        for number in range(position, position + qnt):
-            print(f'|{number + 1:<7}|', end='  ')
-        print()
-        for card in range(position, position + qnt):
-            print(f'|{hand[card].effect():^7}|', end='  ')
-        print()
-        for card in range(position, position + qnt):
-            print(f'|{hand[card].get_color():^7}|', end='  ')
-        print('\n' + '|       |  ' * qnt + '\n' + '¨¨¨¨¨¨¨¨¨  ' * qnt)
+    if turn == 1:
+        for position in range(0, len(hand), 6):
+            if len(hand) - position >= 6:
+                qnt = 6
+            else:
+                qnt = len(hand) - position
+            print('_________  ' * qnt)
+            for number in range(position, position + qnt):
+                print(f'|{number + 1:<7}|', end='  ')
+            print()
+            for card in range(position, position + qnt):
+                print(f'|{hand[card].effect():^7}|', end='  ')
+            print()
+            for card in range(position, position + qnt):
+                print(f'|{hand[card].get_color():^7}|', end='  ')
+            print('\n' + '|       |  ' * qnt + '\n' + '¨¨¨¨¨¨¨¨¨  ' * qnt)
+    else:
+        print(f'{qnt_of_cards["Player 1"]:^64}')

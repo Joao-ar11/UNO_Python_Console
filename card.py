@@ -37,6 +37,7 @@ class Card:
         elif number == 14:
             self.number = '+4'
             self.color = 'Black'
+        self.temp_color = None
     
     
     def __str__(self):
@@ -44,7 +45,7 @@ class Card:
     
     
     def check(self, other_card):
-        if self.number == other_card.number or self.color == other_card.color or self.color == 'Black' or other_card.color == 'Black':
+        if self.effect() == other_card.effect() or self.get_color() == other_card.get_color() or self.color == 'Black':
             return True
         else:
             return False
@@ -52,7 +53,34 @@ class Card:
     
     def effect(self):
         return self.number
+    
+    
+    def change_color(self, new_color):
+        if new_color == 0:
+            self.temp_color = None
+        if new_color == 1:
+            self.temp_color = 'Red'
+        elif new_color == 2:
+            self.temp_color = 'Blue'
+        elif new_color == 3:
+            self.temp_color = 'Yellow'
+        elif new_color == 4:
+            self.temp_color = 'Green'
 
     
     def get_color(self):
-        return self.color
+        if self.temp():
+            return self.temp_color
+        else:
+            return self.color
+        
+        
+    def temp(self):
+        if self.temp_color == None:
+            return False
+        else:
+            return True
+    
+    
+    def summary(self):
+        return (self.effect(), self.get_color())
